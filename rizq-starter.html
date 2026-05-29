@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Rizq Starter — The Muslim Investor's Essential Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F0EDE6;
+    min-height: 100vh;
+    padding: 20px 16px 40px;
+    color: #3D3B3A;
+  }
+
+  .page {
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    background: #3D3B3A;
+    border-radius: 16px 16px 0 0;
+    padding: 28px 24px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(255,204,8,0.06);
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    right: 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255,204,8,0.04);
+  }
+
+  .brand-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    color: #FFCC08;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .ig-handle {
+    font-size: 11px;
+    color: rgba(250,247,241,0.35);
+    letter-spacing: 0.02em;
+  }
+
+  .header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #FAF7F1;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .header-subtitle {
+    font-size: 12px;
+    color: #FFCC08;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .header-desc {
+    font-size: 13px;
+    color: rgba(250,247,241,0.55);
+    margin-top: 10px;
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  /* BODY */
+  .body {
+    background: #FAF7F1;
+    padding: 0 0 4px;
+    border-left: 1px solid #e5e0d8;
+    border-right: 1px solid #e5e0d8;
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 20px 20px;
+    border-bottom: 1px solid #ede8e0;
+  }
+
+  .section:last-child {
+    border-bottom: none;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .section-num {
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: #FFCC08;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #3D3B3A;
+    margin-top: 1px;
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #3D3B3A;
+    line-height: 1.35;
+  }
+
+  .section-subtitle {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  /* INPUTS */
+  .input-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .input-label {
+    font-size: 12px;
+    color: #888;
+    white-space: nowrap;
+  }
+
+  .calc-input {
+    width: 110px;
+    height: 36px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0 12px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    background: #fff;
+    color: #3D3B3A;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .calc-input:focus {
+    border-color: #FFCC08;
+  }
+
+  .calc-arrow {
+    font-size: 12px;
+    color: #bbb;
+    white-space: nowrap;
+  }
+
+  .result-chip {
+    background: #3D3B3A;
+    border-radius: 8px;
+    padding: 8px 14px;
+    flex: 1;
+    min-width: 130px;
+  }
+
+  .result-chip-label {
+    font-size: 10px;
+    color: rgba(255,204,8,0.65);
+    display: block;
+    margin-bottom: 2px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .result-chip-val {
+    font-size: 16px;
+    font-weight: 500;
+    color: #FFCC08;
+  }
+
+  .section-note {
+    font-size: 12px;
+    color: #999;
+    line-height: 1.55;
+    margin-top: 4px;
+    padding-left: 38px;
+  }
+
+  /* PILLS */
+  .pill-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding-left: 38px;
+  }
+
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #3D3B3A;
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.15s;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+  }
+
+  .pill:active { transform: scale(0.97); }
+
+  .pill.selected {
+    background: #3D3B3A;
+    color: #FAF7F1;
+    border-color: #3D3B3A;
+  }
+
+  .pill-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #FFCC08;
+    flex-shrink: 0;
+  }
+
+  /* REVEAL BOX */
+  .reveal-box {
+    margin-top: 12px;
+    margin-left: 38px;
+    background: #fff;
+    border: 1px solid #e5e0d8;
+    border-left: 3px solid #FFCC08;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    display: none;
+  }
+
+  .reveal-box.visible { display: block; }
+
+  .reveal-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #3D3B3A;
+    margin-bottom: 4px;
+  }
+
+  .reveal-body {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+
+  .reveal-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #3D3B3A;
+    text-decoration: none;
+    border-bottom: 1.5px solid #FFCC08;
+    padding-bottom: 1px;
+  }
+
+  /* ETF BOX */
+  .etf-box {
+    margin-left: 38px;
+    background: #fff;
+    border: 1px solid #e5e0d8;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+
+  .etf-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: #3D3B3A;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .etf-desc {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.55;
+    margin-bottom: 10px;
+  }
+
+  .etf-badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  .badge-dark {
+    background: #3D3B3A;
+    color: #FFCC08;
+  }
+
+  .badge-light {
+    background: #F0EDE6;
+    color: #888;
+  }
+
+  /* INVEST RESULT */
+  .invest-result {
+    background: #3D3B3A;
+    color: #FFCC08;
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-top: 10px;
+    margin-left: 38px;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .invest-note {
+    font-size: 11px;
+    color: rgba(255,204,8,0.6);
+    margin-top: 4px;
+    font-weight: 400;
+    display: block;
+  }
+
+  /* STEPS */
+  .steps {
+    padding-left: 38px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .step-num {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border: 1.5px solid #FFCC08;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: #3D3B3A;
+    margin-top: 1px;
+  }
+
+  .step-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #3D3B3A;
+    margin-bottom: 3px;
+    line-height: 1.35;
+  }
+
+  .step-desc {
+    font-size: 12px;
+    color: #999;
+    line-height: 1.55;
+  }
+
+  /* PLAN SUMMARY */
+  .summary {
+    background: #3D3B3A;
+    margin: 0;
+    padding: 20px;
+    border-top: none;
+  }
+
+  .summary-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: #FAF7F1;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .summary-item {
+    background: rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .summary-label {
+    font-size: 10px;
+    color: rgba(255,204,8,0.6);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .summary-val {
+    font-size: 14px;
+    font-weight: 500;
+    color: #FAF7F1;
+  }
+
+  .summary-cta {
+    background: #FFCC08;
+    color: #3D3B3A;
+    border: none;
+    border-radius: 10px;
+    padding: 14px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .summary-cta:active { opacity: 0.85; }
+
+  .summary-sub {
+    font-size: 11px;
+    color: rgba(250,247,241,0.3);
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  /* FOOTER */
+  .footer {
+    background: #2E2C2B;
+    border-radius: 0 0 16px 16px;
+    padding: 16px 20px;
+  }
+
+  .disclaimer {
+    font-size: 10px;
+    color: rgba(250,247,241,0.25);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    color: rgba(255,204,8,0.5);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-ig {
+    font-size: 10px;
+    color: rgba(250,247,241,0.2);
+  }
+
+  .etf-mini-card {
+    background: #fff;
+    border: 1px solid #e5e0d8;
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+  }
+
+  .etf-mini-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+
+  .etf-ticker {
+    font-size: 13px;
+    font-weight: 500;
+    color: #3D3B3A;
+    font-family: 'DM Sans', sans-serif;
+    background: #F0EDE6;
+    padding: 2px 8px;
+    border-radius: 5px;
+    letter-spacing: 0.04em;
+  }
+
+  .etf-mini-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: #3D3B3A;
+    margin-bottom: 4px;
+    line-height: 1.35;
+  }
+
+  .etf-mini-desc {
+    font-size: 11px;
+    color: #999;
+    line-height: 1.55;
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+  input[type=number] { -moz-appearance: textfield; }
+  input::placeholder { color: #ccc; }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="brand-row">
+      <span class="brand-name">The Rizq Letter</span>
+      <span class="ig-handle">@zayyan.akm</span>
+    </div>
+    <h1 class="header-title">The Rizq<br>Starter</h1>
+    <div class="header-subtitle">The Muslim Investor's Essential Tool</div>
+    <p class="header-desc">Fill this in tonight. It takes 10 minutes and it's the most useful 10 minutes you'll spend this week.</p>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <!-- SECTION 1 — EMERGENCY FUND -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">1</div>
+        <div>
+          <div class="section-title">Emergency Fund Target</div>
+          <div class="section-subtitle">Before you invest a single penny</div>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <span class="input-label">Monthly expenses (£)</span>
+        <input class="calc-input" type="number" id="expenses" placeholder="e.g. 1500" oninput="calcEF()">
+        <span class="calc-arrow">× 3 =</span>
+        <div class="result-chip">
+          <span class="result-chip-label">Your target</span>
+          <span class="result-chip-val" id="ef-result">£ —</span>
+        </div>
+      </div>
+
+      <p class="section-note">Save this in a halal savings account first. Gatehouse Bank or QIB — both Shariah compliant, both UK regulated. Do not invest until this is in place.</p>
+    </div>
+
+    <!-- SECTION 2 — ISA -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">2</div>
+        <div>
+          <div class="section-title">Which Halal ISA to Open</div>
+          <div class="section-subtitle">Pick your situation</div>
+        </div>
+      </div>
+
+      <div class="pill-row">
+        <button class="pill" id="pill-isa" onclick="selectISA('isa')">
+          <span class="pill-dot"></span>Investing for 5+ years
+        </button>
+        <button class="pill" id="pill-lisa" onclick="selectISA('lisa')">
+          <span class="pill-dot"></span>Protecting money for a big purchase soon
+        </button>
+      </div>
+
+      <div class="reveal-box" id="isa-box">
+        <div class="reveal-title">Open a Stocks &amp; Shares ISA with Trading 212</div>
+        <div class="reveal-body">Up to £20,000/year. All gains and dividends completely tax free. This is the platform I use personally — it's free to open and takes 15 minutes. You're investing for the long term, so you want your money working in halal global markets.</div>
+        <a class="reveal-link" href="TRADING212_AFFILIATE_LINK_HERE">Open Trading 212 → [affiliate link coming soon]</a>
+      </div>
+
+      <div class="reveal-box" id="lisa-box">
+        <div class="reveal-title">Use Raisin UK to access halal savings accounts</div>
+        <div class="reveal-body">If you need access to this money within 1–3 years — a house deposit, wedding, car — don't put it in the stock market. Market timing risk is real. Raisin is the platform I use personally — it gives you access to Shariah-compliant savings accounts from Qatar Islamic Bank, Kuwait Finance House, and Al Rayan, all in one place. No riba. Fully UK regulated.</div>
+        <a class="reveal-link" href="https://www.raisin.com/en-gb/referral/?raf=527057557c8d52b0e146e49311d0bb425e6a067c&utm_source=transactional&utm_campaign=mandrill_customer-referral" style="margin-bottom:10px; display:inline-flex;">Open Raisin UK →</a>
+        <div style="background:#f5f2ec; border-radius:6px; padding:10px 12px; margin-top:10px;">
+          <div style="font-size:11px; font-weight:500; color:#3D3B3A; margin-bottom:3px;">Get £100 free — for both of us</div>
+          <div style="font-size:11px; color:#999; line-height:1.6;">Locking money away for 1+ year, or depositing £10,000+? Use my referral link above and we both get £100 when you open and fund a fixed term account. Available through Kuwait Finance House, Al Rayan, and QIB on Raisin. Note: banks and offers change — check Raisin for what's available at the time you sign up.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3 — ETF -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">3</div>
+        <div>
+          <div class="section-title">Halal ETFs — Where to Start</div>
+          <div class="section-subtitle">The ETF I started with, and the basket I built over time</div>
+        </div>
+      </div>
+
+      <div class="etf-box" style="margin-bottom:10px;">
+        <div style="font-size:10px; color:#FFCC08; background:#3D3B3A; display:inline-block; padding:2px 10px; border-radius:20px; font-weight:500; letter-spacing:0.06em; margin-bottom:8px; text-transform:uppercase;">Where I started</div>
+        <div class="etf-name">ISUS — iShares MSCI USA Islamic UCITS ETF</div>
+        <div class="etf-desc">Tracks Shariah-screened US large cap companies. The US market is the most liquid and most established — a clean, simple entry point for a first-time investor. This was my first ETF and it's where I'd tell most people to begin.</div>
+        <div class="etf-badges">
+          <span class="badge badge-dark">Shariah compliant</span>
+          <span class="badge badge-light">US large caps</span>
+          <span class="badge badge-light">Long term hold</span>
+        </div>
+        <div style="margin-top:10px;">
+          <a class="reveal-link" href="#">Verify on Zoya →</a>
+        </div>
+      </div>
+
+      <button class="pill" id="show-more-btn" onclick="toggleBasket()" style="margin-left:0; border-radius:8px; width:100%; justify-content:center; padding:10px 14px;">
+        <span class="pill-dot"></span><span id="show-more-label">Show my full ETF basket</span>
+      </button>
+
+      <div id="etf-basket" style="display:none; margin-top:10px; display:none;">
+        <div style="font-size:12px; color:#aaa; margin-bottom:10px; line-height:1.5;">These are the ETFs I personally hold. I built this basket gradually over time — not all at once. Start with ISUS, get comfortable, then add from here as your confidence grows.</div>
+
+        <div class="etf-mini-card">
+          <div class="etf-mini-top">
+            <span class="etf-ticker">HIES</span>
+            <span class="badge badge-light" style="font-size:10px;">Developing markets</span>
+          </div>
+          <div class="etf-mini-name">HSBC Islamic Global Emerging Markets Equity ETF</div>
+          <div class="etf-mini-desc">Exposure to high-growth developing economies — higher potential return, higher volatility. Not a starting point, but worth adding once you have a core position.</div>
+        </div>
+
+        <div class="etf-mini-card">
+          <div class="etf-mini-top">
+            <span class="etf-ticker">HIPS</span>
+            <span class="badge badge-light" style="font-size:10px;">Europe</span>
+          </div>
+          <div class="etf-mini-name">HSBC Islamic European Equity ETF</div>
+          <div class="etf-mini-desc">Shariah-screened European large caps. Adds geographic diversification away from US-heavy exposure.</div>
+        </div>
+
+        <div class="etf-mini-card">
+          <div class="etf-mini-top">
+            <span class="etf-ticker">HIJS</span>
+            <span class="badge badge-light" style="font-size:10px;">Japan</span>
+          </div>
+          <div class="etf-mini-name">HSBC Islamic Japan Equity ETF</div>
+          <div class="etf-mini-desc">Shariah-screened Japanese equity market. Japan is one of the world's largest economies — another diversification layer for a more built-out portfolio.</div>
+        </div>
+
+        <div class="etf-mini-card">
+          <div class="etf-mini-top">
+            <span class="etf-ticker">SKUK</span>
+            <span class="badge badge-light" style="font-size:10px;">Islamic bonds</span>
+          </div>
+          <div class="etf-mini-name">iShares Core Sukuk UCITS ETF</div>
+          <div class="etf-mini-desc">Sukuk are Islamic bonds — they pay a return without interest (riba). Lower risk than equities. Adds stability to the portfolio. Good for balancing out equity exposure.</div>
+        </div>
+
+        <div class="etf-mini-card" style="margin-bottom:0;">
+          <div class="etf-mini-top">
+            <span class="etf-ticker">SGLN</span>
+            <span class="badge badge-light" style="font-size:10px;">Physical gold</span>
+          </div>
+          <div class="etf-mini-name">iShares Physical Gold ETC</div>
+          <div class="etf-mini-desc">Backed by physical gold held in a vault. Not technically an ETF but widely held. Gold is a store of value and an inflation hedge — holds purchasing power over time. A small allocation (5–10%) makes sense in most long-term portfolios.</div>
+        </div>
+      </div>
+
+      <div style="background:#fff8e6; border:1px solid #ffe08a; border-radius:8px; padding:12px 14px; margin-top:12px;">
+        <div style="font-size:11px; font-weight:500; color:#8a6800; margin-bottom:4px;">Important — please read</div>
+        <div style="font-size:11px; color:#a07800; line-height:1.6;">These are the ETFs I personally invest in. This is not a recommendation. Everyone's financial situation is different — do your own research and only invest money you are willing to lose. ETFs are long-term investments — markets go up and down, and you need to be comfortable holding through the dips. Always consult a qualified financial advisor before making investment decisions.</div>
+      </div>
+
+      <div style="background:#fff; border:1px solid #e5e0d8; border-radius:8px; padding:14px 16px; margin-top:10px;">
+        <div style="font-size:11px; font-weight:500; color:#3D3B3A; margin-bottom:4px;">Want all the decisions taken care of for you?</div>
+        <div style="font-size:11px; color:#999; line-height:1.6; margin-bottom:10px;">Amal Invest is a Shariah-certified platform that pre-screens everything and tells you exactly what to buy — no guesswork, no ETF research required. Two simple funds: Grow (long term) and Save (steady income). Works directly through Trading 212. Shariah certified by Mufti Faraz Adam. 10,000+ investors. If you want investing on autopilot, this is the option.</div>
+        <a class="reveal-link" href="https://amalinvest.com/?via=zayyan">Try Amal Invest → [affiliate link]</a>
+      </div>
+    </div>
+
+    <!-- SECTION 4 — MONTHLY AMOUNT -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">4</div>
+        <div>
+          <div class="section-title">Your Monthly Investment Amount</div>
+          <div class="section-subtitle">The number you set your standing order to</div>
+        </div>
+      </div>
+
+      <div class="input-row">
+        <span class="input-label">Monthly take-home (£)</span>
+        <input class="calc-input" type="number" id="income" placeholder="e.g. 2800" oninput="calcInvest()">
+        <span class="calc-arrow">× 20%</span>
+      </div>
+
+      <div class="invest-result" id="invest-result">
+        Your starting amount: <strong id="invest-val">£ —</strong>
+        <span class="invest-note" id="invest-note" style="display:none;">Increase by £25 every 3 months as you build confidence</span>
+      </div>
+
+      <p class="section-note" style="padding-left:0; margin-top:10px;">Treat this like a bill. Set it to leave your account on pay day — before it hits your current account mentally.</p>
+    </div>
+
+    <!-- SECTION 5 — STEPS -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-num">5</div>
+        <div>
+          <div class="section-title">Your 3 Steps</div>
+          <div class="section-subtitle">Starting today. Not someday.</div>
+        </div>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">Sort your current account — remove riba today</div>
+            <div class="step-desc">Open Starling Bank (free, 10 minutes). Go to Settings → Savings → Interest → Off. Your day-to-day money is now riba-free.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">Open your Trading 212 ISA — 15 minutes online</div>
+            <div class="step-desc">Stocks &amp; Shares ISA if you're investing for 5+ years. Raisin UK (Qatar Islamic Bank) if you need the money sooner — halal, easy access, no riba. Search "iShares MSCI USA Islamic" (ISUS) inside Trading 212 and add it to your ISA account.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-title">Set up your monthly standing order — on pay day</div>
+            <div class="step-desc">Use the number from Section 4. Set it to leave your bank the same day your salary arrives. You won't miss what you never see. This is how wealth is built.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PLAN SUMMARY -->
+  <div class="summary">
+    <div class="summary-title">Your Plan at a Glance</div>
+    <div class="summary-grid">
+      <div class="summary-item">
+        <span class="summary-label">Emergency fund</span>
+        <span class="summary-val" id="s-ef">Not set yet</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">Monthly investment</span>
+        <span class="summary-val" id="s-inv">Not set yet</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">ISA type</span>
+        <span class="summary-val" id="s-isa">Not selected</span>
+      </div>
+      <div class="summary-item">
+        <span class="summary-label">First ETF</span>
+        <span class="summary-val" style="font-size:11px; padding-top:2px; display:block; line-height:1.3;">iShares MSCI World Islamic</span>
+      </div>
+    </div>
+    <a href="https://therizqletter.beehiiv.com" class="summary-cta">Get The Rizq Letter every Sunday →</a>
+    <p class="summary-sub">Weekly halal investing insights. Free. 3 minutes to read.</p>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p class="disclaimer">This resource is for educational purposes only and does not constitute financial advice. Always do your own research and consult a qualified financial advisor before making any investment decisions. Past performance does not guarantee future results. Affiliate links may be included — these support free content at no cost to you.</p>
+    <div class="footer-bottom">
+      <span class="footer-brand">The Rizq Letter</span>
+      <span class="footer-ig">@zayyan.akm</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function toggleBasket() {
+    var basket = document.getElementById('etf-basket');
+    var label = document.getElementById('show-more-label');
+    var btn = document.getElementById('show-more-btn');
+    if (basket.style.display === 'none' || basket.style.display === '') {
+      basket.style.display = 'block';
+      label.textContent = 'Hide full basket';
+      btn.classList.add('selected');
+    } else {
+      basket.style.display = 'none';
+      label.textContent = 'Show my full ETF basket';
+      btn.classList.remove('selected');
+    }
+  }
+
+  function calcEF() {
+    var exp = parseFloat(document.getElementById('expenses').value);
+    var el = document.getElementById('ef-result');
+    var sel = document.getElementById('s-ef');
+    if (!isNaN(exp) && exp > 0) {
+      var val = '£' + Math.round(exp * 3).toLocaleString('en-GB');
+      el.textContent = val;
+      sel.textContent = val;
+    } else {
+      el.textContent = '£ —';
+      sel.textContent = 'Not set yet';
+    }
+  }
+
+  function calcInvest() {
+    var inc = parseFloat(document.getElementById('income').value);
+    var el = document.getElementById('invest-val');
+    var note = document.getElementById('invest-note');
+    var sel = document.getElementById('s-inv');
+    if (!isNaN(inc) && inc > 0) {
+      var val = '£' + Math.round(inc * 0.2).toLocaleString('en-GB') + '/mo';
+      el.textContent = val;
+      note.style.display = 'block';
+      sel.textContent = val;
+    } else {
+      el.textContent = '£ —';
+      note.style.display = 'none';
+      sel.textContent = 'Not set yet';
+    }
+  }
+
+  function selectISA(type) {
+    document.getElementById('isa-box').classList.remove('visible');
+    document.getElementById('lisa-box').classList.remove('visible');
+    document.getElementById('pill-isa').classList.remove('selected');
+    document.getElementById('pill-lisa').classList.remove('selected');
+    var sel = document.getElementById('s-isa');
+    if (type === 'isa') {
+      document.getElementById('pill-isa').classList.add('selected');
+      document.getElementById('isa-box').classList.add('visible');
+      sel.textContent = 'S&S ISA';
+    } else {
+      document.getElementById('pill-lisa').classList.add('selected');
+      document.getElementById('lisa-box').classList.add('visible');
+      sel.textContent = 'Cash ISA / Savings';
+    }
+  }
+</script>
+
+</body>
+</html>
